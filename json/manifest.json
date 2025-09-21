@@ -1,7 +1,8 @@
 {
+  "id": "/GreenBite/json/",
   "name": "GreenBite",
   "short_name": "GreenBite",
-  "start_url": "./",
+  "start_url": "../index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2E7D32",
