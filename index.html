@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenBite - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="manifest" href="./json/manifest.json">
+  <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
+
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo">
+        <img src="./images/logo.png" alt="GreenBite Logo"></a>
+        <ul class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./recipes.html">Recipes</a></li>
+          <li><a href="./calculator.html">Calculator</a></li>
+          <li><a href="./workout.html">Workout</a></li>
+          <li><a href="./mindfulness.html">Mindfulness</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero reveal">
+      <div class="hero-content">
+        <h1>Welcome to GreenBite</h1>
+        <p>Your journey to balanced meals, exercise, and mindfulness starts here.</p>
+        <div class="quotes" id="quotes"></div>
+      </div>
+    </section>
+    <section class="tips reveal">
+      <h2>Health Tip of the Day</h2>
+      <p id="dailyTip"></p>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="newsletter">
+        <input type="email" placeholder="Subscribe to newsletter" id="emailSub">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <ul class="footer-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2025 GreenBite. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="./script/script.js"></script>
+  <script>
+    // Auto-rotating Quotes
+    const quotes = [
+      '"Health is not valued till sickness comes." - Thomas Fuller',
+      '"Take care of your body. It\'s the only place you have to live." - Jim Rohn',
+      '"To keep the body in good health is a duty." - Buddha'
+    ];
+    let currentQuote = 0;
+    function rotateQuotes() {
+      const div = document.getElementById('quotes');
+      div.textContent = quotes[currentQuote];
+      currentQuote = (currentQuote + 1) % quotes.length;
+    }
+    setInterval(rotateQuotes, 5000);
+    rotateQuotes();
+
+    // Daily Tip (date-based)
+    const tips = [
+      'Drink at least 8 glasses of water a day.',
+      'Incorporate 30 minutes of exercise into your daily routine.',
+      'Practice mindfulness for 5 minutes before bed.',
+      'Eat a colorful variety of fruits and vegetables.'
+    ];
+    const today = new Date().getDate() % tips.length;
+    document.getElementById('dailyTip').textContent = tips[today];
+  </script>
+</body>
+</html>

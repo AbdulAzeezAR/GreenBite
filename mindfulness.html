@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenBite - Mindfulness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="manifest" href="./json/manifest.json">
+  <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo">
+        <img src="./images/logo.png" alt="GreenBite Logo" id="logo"></a>
+        <ul class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./recipes.html">Recipes</a></li>
+          <li><a href="./calculator.html">Calculator</a></li>
+          <li><a href="./workout.html">Workout</a></li>
+          <li><a href="./mindfulness.html">Mindfulness</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="mindfulness reveal">
+      <h1>Mindfulness Practices</h1>
+      <div class="breathing reveal">
+        <div class="circle" id="breathCircle"></div>
+        <p id="breathText">Inhale...</p>
+      </div>
+      <div class="timer reveal" style="text-align: center; max-width: 300px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h2>Meditation Timer</h2>
+        <input type="number" id="minutes" placeholder="Minutes" min="1" max="60" value="5" style="width: 100px; padding: 0.5rem; margin: 0.5rem;">
+        <br>
+        <button onclick="startMeditation()">Start Session</button>
+        <div id="medTime" style="font-size: 2rem; font-weight: bold; margin: 1rem 0;">00:00</div>
+      </div>
+      <div class="sounds reveal" style="text-align: center;">
+  <div>
+    <button onclick="playSound('ocean')">Ocean Waves</button>
+    <audio loop id="ocean" src="./audio/oceanwaves.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div>
+    <button onclick="playSound('birds')">Forest Birds</button>
+    <audio loop id="birds" src="./audio/forestbirds.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div>
+    <button onclick="playSound('rain')">Gentle Rain</button>
+    <audio loop id="rain" src="./audio/gentlerain.mp3" type="audio/mpeg"></audio>
+  </div>
+  <p>Note: Toggles pre-recorded ambient sounds.</p>
+</div>
+      <p style="text-align: center; font-size: 1.1rem;">Sessions completed: <span id="sessions">0</span></p>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="newsletter">
+        <input type="email" placeholder="Subscribe to newsletter" id="emailSub">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <ul class="footer-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2025 GreenBite. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="./script/script.js"></script>
+  <script>
+    let breathPhase = 0;
+    let breathInterval;
+    let medInterval;
+    let medTime = 0;
+    let audioCtx = null;
+    let soundOscillators = {};
+
+    function playBeep() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.frequency.value = 800;
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+      oscillator.start(audioCtx.currentTime);
+      oscillator.stop(audioCtx.currentTime + 0.5);
+    }
+
+    function startBreathing() {
+      const circle = document.getElementById('breathCircle');
+      const text = document.getElementById('breathText');
+      breathInterval = setInterval(() => {
+        if (breathPhase === 0) { // Inhale
+          text.textContent = 'Inhale';
+          circle.style.transform = 'scale(1.2)';
+          setTimeout(() => breathPhase = 1, 4000);
+        } else if (breathPhase === 1) { // Hold
+          text.textContent = 'Hold';
+          circle.style.transform = 'scale(1.3)';
+          setTimeout(() => breathPhase = 2, 2000);
+        } else { // Exhale
+          text.textContent = 'Exhale';
+          circle.style.transform = 'scale(1)';
+          setTimeout(() => { breathPhase = 0; }, 4000);
+        }
+      }, 4000);
+    }
+
+    function startMeditation() {
+      const mins = parseInt(document.getElementById('minutes').value) * 60;
+      medTime = mins;
+      updateMedTime();
+      if (medInterval) clearInterval(medInterval);
+      medInterval = setInterval(() => {
+        medTime--;
+        updateMedTime();
+        if (medTime <= 0) {
+          clearInterval(medInterval);
+          playBeep();
+          let sessions = parseInt(localStorage.getItem('sessions') || '0') + 1;
+          localStorage.setItem('sessions', sessions.toString());
+          document.getElementById('sessions').textContent = sessions;
+          alert('Session complete! Well done.');
+        }
+      }, 1000);
+    }
+
+    function updateMedTime() {
+      const mins = Math.floor(medTime / 60);
+      const secs = medTime % 60;
+      document.getElementById('medTime').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    let currentAudio = null;
+
+function playSound(type) {
+  const audio = document.getElementById(type);
+  const button = event.target;
+  if (currentAudio && currentAudio !== audio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    document.querySelector(`button[onclick="playSound('${currentAudio.id}')"]`).textContent = 
+      currentAudio.id === 'ocean' ? 'Ocean Waves' : currentAudio.id === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+  }
+  if (audio.paused) {
+    audio.play();
+    button.textContent = type === 'ocean' ? 'Stop Ocean' : type === 'birds' ? 'Stop Birds' : 'Stop Rain';
+    currentAudio = audio;
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    button.textContent = type === 'ocean' ? 'Ocean Waves' : type === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+    currentAudio = null;
+  }
+}
+
+    // Load sessions
+    document.getElementById('sessions').textContent = localStorage.getItem('sessions') || '0';
+
+    // Start breathing on load
+    startBreathing();
+  </script>
+</body>
+</html>

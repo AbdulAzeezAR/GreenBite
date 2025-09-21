@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenBite - Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="manifest" href="./json/manifest.json">
+  <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo">
+        <img src="./images/logo.png" alt="GreenBite Logo"></a>
+        <ul class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./recipes.html">Recipes</a></li>
+          <li><a href="./calculator.html">Calculator</a></li>
+          <li><a href="./workout.html">Workout</a></li>
+          <li><a href="./mindfulness.html">Mindfulness</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="contact" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+      <h1>Contact & Feedback</h1>
+      <form id="feedbackForm">
+        <label>Name: <input type="text" id="name" required></label>
+        <label>Email: <input type="email" id="email" required></label>
+        <label>Message: <textarea id="feedbackMessage" required></textarea></label>
+        <button type="submit">Submit Feedback</button>
+      </form>
+      <div id="confirmation"></div>
+      <div class="map">
+        <h2>GreenBite HQ</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31686.22661582428!2d79.83815163765869!3d6.927078667509258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593cf65a531d%3A0x2c81a87d80a2d2c!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1695200000000!5m2!1sen!2sus" width="600" height="450" style="border:0; max-width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="faq">
+        <h2>FAQ</h2>
+        <div class="accordion">
+          <div class="item">
+            <h3 class="accordion-header">What is GreenBite?</h3>
+            <p class="panel">GreenBite promotes healthy living through balanced meals, exercise, and mindfulness.</p>
+          </div>
+          <div class="item">
+            <h3 class="accordion-header">How accurate is the calculator?</h3>
+            <p class="panel">It uses standard BMR/TDEE formulas; consult a professional for personalized advice.</p>
+          </div>
+          <div class="item">
+            <h3 class="accordion-header">Can I save my data?</h3>
+            <p class="panel">Yes, interactions like saved recipes and sessions are stored locally in your browser.</p>
+          </div>
+        </div>
+      </div>
+      <div id="savedFeedback">
+        <h2>Saved Feedback</h2>
+        <div id="feedbackList"></div>
+        <button onclick="exportFeedback()">Export Feedback</button>
+        <button onclick="clearFeedback()">Clear Feedback</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="newsletter">
+        <input type="email" placeholder="Subscribe to newsletter" id="emailSub">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <ul class="footer-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2025 GreenBite. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="./script/script.js"></script>
+  <script>
+    console.log('Contact page script loaded');
+    document.getElementById('feedbackForm').addEventListener('submit', e => {
+      e.preventDefault();
+      console.log('Form submission triggered');
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('feedbackMessage').value;
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      const feedback = { name, email, message, date: new Date().toISOString() };
+      let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      feedbacks.push(feedback);
+      localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+      document.getElementById('confirmation').innerHTML = '<p style="color: green; text-align: center; font-weight: bold; opacity: 1;">Thank you! Your feedback has been submitted and saved locally.</p>';
+      e.target.reset();
+      displayFeedback();
+    });
+
+    function toggleAccordion(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const header = event.currentTarget;
+      console.log('Accordion clicked:', header.textContent);
+      const panel = header.nextElementSibling;
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', toggleAccordion);
+    });
+
+    function displayFeedback() {
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      const list = document.getElementById('feedbackList');
+      list.innerHTML = feedbacks.length
+        ? feedbacks.map(f => `<p><strong>${f.name}</strong> (${f.email}): ${f.message} <em>(${new Date(f.date).toLocaleString()})</em></p>`).join('')
+        : '<p>No feedback yet.</p>';
+    }
+
+    function exportFeedback() {
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      const data = JSON.stringify(feedbacks, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'feedbacks.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearFeedback() {
+      if (confirm('Are you sure you want to clear all feedback?')) {
+        localStorage.removeItem('feedbacks');
+        document.getElementById('feedbackList').innerHTML = '<p>No feedback yet.</p>';
+        alert('Feedback cleared.');
+      }
+    }
+
+    window.addEventListener('load', displayFeedback);
+  </script>
+</body>
+</html>

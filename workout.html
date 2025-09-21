@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenBite - Workout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="manifest" href="./json/manifest.json">
+  <link rel="icon" type="image/x-icon" href="./favicon_io/favicon.ico">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html" class="logo">
+        <img src="./images/logo.png" alt="GreenBite Logo" id="logo" ></a>
+        <ul class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./recipes.html">Recipes</a></li>
+          <li><a href="./calculator.html">Calculator</a></li>
+          <li><a href="./workout.html">Workout</a></li>
+          <li><a href="./mindfulness.html">Mindfulness</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="workout reveal">
+      <h1>Workout Generator</h1>
+      </div>
+    <div class="sounds reveal" style="text-align: center;">
+  <div>
+    <button onclick="playSound('ocean')">Ocean Waves</button>
+    <audio loop id="ocean" src="./audio/oceanwaves.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div>
+    <button onclick="playSound('birds')">Forest Birds</button>
+    <audio loop id="birds" src="./audio/forestbirds.mp3" type="audio/mpeg"></audio>
+  </div>
+  <div>
+    <button onclick="playSound('rain')">Gentle Rain</button>
+    <audio loop id="rain" src="./audio/gentlerain.mp3" type="audio/mpeg"></audio>
+  </div>
+  <p>Note: Toggles pre-recorded ambient sounds.</p>
+</div>
+      <form id="workoutForm" style="max-width: 500px; margin: 2rem auto;">
+        <label>Body Part:
+          <select id="bodyPart">
+            <option value="full">Full Body</option>
+            <option value="arms">Arms</option>
+            <option value="legs">Legs</option>
+            <option value="core">Core</option>
+          </select>
+        </label>
+        <label>Equipment:
+          <select id="equip">
+            <option value="none">None</option>
+            <option value="dumbbells">Dumbbells</option>
+            <option value="barbell">Barbell</option>
+          </select>
+        </label>
+        <button type="submit">Generate Workout</button>
+      </form>
+      <div id="workoutPlan" class="exercises"></div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-container">
+      <div class="newsletter">
+        <input type="email" placeholder="Subscribe to newsletter" id="emailSub">
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <ul class="footer-links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <p>&copy; 2025 GreenBite. All rights reserved.</p>
+  </footer>
+  <script src="./script/script.js"></script>
+  <script>
+    const workouts = {
+      full: {
+        none: ['Jumping Jacks', 'Burpees', 'Mountain Climbers'],
+        dumbbells: ['Squats with weights', 'Lunges', 'Push-ups with dumbbells'],
+        barbell: ['Deadlifts', 'Bench Press', 'Squats']
+      },
+      arms: {
+        none: ['Push-ups', 'Tricep Dips', 'Arm Circles'],
+        dumbbells: ['Bicep Curls', 'Tricep Extensions', 'Shoulder Press'],
+        barbell: ['Barbell Curls', 'Overhead Press', 'Skull Crushers']
+      },
+      legs: {
+        none: ['Squats', 'Lunges', 'Calf Raises'],
+        dumbbells: ['Goblet Squats', 'Weighted Lunges', 'Step-ups'],
+        barbell: ['Barbell Squats', 'Romanian Deadlifts', 'Leg Press']
+      },
+      core: {
+        none: ['Planks', 'Crunches', 'Leg Raises'],
+        dumbbells: ['Russian Twists with weight', 'Weighted Crunches', 'Side Bends'],
+        barbell: ['Ab Rollouts', 'Weighted Sit-ups', 'Hanging Leg Raises']
+      }
+    };
+
+    let currentTimer = null;
+    let audioCtx = null;
+
+    function playBeep() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.frequency.value = 800;
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+      oscillator.start(audioCtx.currentTime);
+      oscillator.stop(audioCtx.currentTime + 0.5);
+    }
+
+    document.getElementById('workoutForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const body = document.getElementById('bodyPart').value;
+      const eq = document.getElementById('equip').value;
+      const exList = workouts[body][eq] || [];
+      // Randomly select 4 exercises
+      const selected = exList.sort(() => 0.5 - Math.random()).slice(0, 4);
+      const plan = selected.map(ex => ({ name: ex, time: 30 })); // 30s per exercise
+
+      document.getElementById('workoutPlan').innerHTML = plan.map((ex, i) => `
+        <div class="exercise card reveal">
+          <h3>${ex.name}</h3>
+          <p>Duration: <span id="timer${i}">${ex.time}s</span></p>
+          <button onclick="startTimer(${i}, ${ex.time})">Start Timer</button>
+        </div>
+      `).join('');
+    });
+
+    function startTimer(index, duration) {
+      if (currentTimer) clearInterval(currentTimer);
+      let time = duration;
+      const span = document.getElementById(`timer${index}`);
+      currentTimer = setInterval(() => {
+        time--;
+        span.textContent = time + 's';
+        if (time <= 0) {
+          clearInterval(currentTimer);
+          playBeep();
+          alert('Time\'s up! Take a 10s break.');
+        }
+      }, 1000);
+    }
+    
+ let currentAudio = null;
+
+function playSound(type) {
+  const audio = document.getElementById(type);
+  const button = event.target;
+  if (currentAudio && currentAudio !== audio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    document.querySelector(`button[onclick="playSound('${currentAudio.id}')"]`).textContent = 
+      currentAudio.id === 'ocean' ? 'Ocean Waves' : currentAudio.id === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+  }
+  if (audio.paused) {
+    audio.play();
+    button.textContent = type === 'ocean' ? 'Stop Ocean' : type === 'birds' ? 'Stop Birds' : 'Stop Rain';
+    currentAudio = audio;
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    button.textContent = type === 'ocean' ? 'Ocean Waves' : type === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+    currentAudio = null;
+  }
+}
+  </script>
+</body>
+</html>
