@@ -1,14 +1,14 @@
 const CACHE_NAME = 'greenbite-v1';
 const urlsToCache = [
-  '/',
-  '/styles.css',
-  '/script.js',
-  '/index.html',
-  '/recipes.html',
-  '/calculator.html',
-  '/workout.html',
-  '/mindfulness.html',
-  '/contact.html'
+  '../',
+  '../styles/styles.css',
+  'script.js',
+  '../index.html',
+  '../recipes.html',
+  '../calculator.html',
+  '../workout.html',
+  '../mindfulness.html',
+  '../contact.html'
 ];
 
 self.addEventListener('install', event => {
