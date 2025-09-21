@@ -37,16 +37,16 @@
       </div>
     <div class="sounds reveal" style="text-align: center;">
   <div>
-    <button onclick="playSound('ocean')">Ocean Waves</button>
-    <audio loop id="ocean" src="./audio/oceanwaves.mp3" type="audio/mpeg"></audio>
+    <button onclick="playSound('spark')">Spark</button>
+    <audio loop id="spark" src="./audio/spark.mp3" type="audio/mpeg"></audio>
   </div>
   <div>
-    <button onclick="playSound('birds')">Forest Birds</button>
-    <audio loop id="birds" src="./audio/forestbirds.mp3" type="audio/mpeg"></audio>
+    <button onclick="playSound('rush')">Rush</button>
+    <audio loop id="rush" src="./audio/rush.mp3" type="audio/mpeg"></audio>
   </div>
   <div>
-    <button onclick="playSound('rain')">Gentle Rain</button>
-    <audio loop id="rain" src="./audio/gentlerain.mp3" type="audio/mpeg"></audio>
+    <button onclick="playSound('energy')">Energy</button>
+    <audio loop id="energy" src="./audio/energy.mp3" type="audio/mpeg"></audio>
   </div>
   <p>Note: Toggles pre-recorded ambient sounds.</p>
 </div>
@@ -167,16 +167,16 @@ function playSound(type) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
     document.querySelector(`button[onclick="playSound('${currentAudio.id}')"]`).textContent = 
-      currentAudio.id === 'ocean' ? 'Ocean Waves' : currentAudio.id === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+      currentAudio.id === 'spark' ? 'Spark' : currentAudio.id === 'rush' ? 'Rush' : 'Energy';
   }
   if (audio.paused) {
     audio.play();
-    button.textContent = type === 'ocean' ? 'Stop Ocean' : type === 'birds' ? 'Stop Birds' : 'Stop Rain';
+    button.textContent = type === 'spark' ? 'Stop Spark' : type === 'rush' ? 'Stop Rush' : 'Stop Energy';
     currentAudio = audio;
   } else {
     audio.pause();
     audio.currentTime = 0;
-    button.textContent = type === 'ocean' ? 'Ocean Waves' : type === 'birds' ? 'Forest Birds' : 'Gentle Rain';
+    button.textContent = type === 'spark' ? 'Spark' : type === 'rush' ? 'Rush' : 'Energy';
     currentAudio = null;
   }
 }
