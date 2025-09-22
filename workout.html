@@ -35,7 +35,7 @@
     <section class="workout reveal">
       <h1>Workout Generator</h1>
      
-    <div class="sounds reveal" style="text-align: center;"> // Added workout music section
+    <div class="sounds reveal" style="text-align: center;"> <!-- Workout Music Controls -->
   <div>
     <button onclick="playSound('spark')">Spark</button>
     <audio loop id="spark" src="./audio/spark.mp3"></audio>
@@ -50,7 +50,7 @@
   </div>
   <p>Note: Toggles pre-recorded workout music.</p>
 </div>
-      <form id="workoutForm" style="max-width: 500px; margin: 2rem auto;"> // Added form to select workout preferences
+      <form id="workoutForm" style="max-width: 500px; margin: 2rem auto;"> <!-- Workout Form -->
         <label>Body Part:
           <select id="bodyPart">
             <option value="full">Full Body</option>
@@ -66,7 +66,7 @@
             <option value="barbell">Barbell</option>
           </select>
         </label>
-        <button type="submit">Generate Workout</button> // Button to generate workout plan
+        <button type="submit">Generate Workout</button>
       </form>
       <div id="workoutPlan" class="exercises"></div>
     </section>
