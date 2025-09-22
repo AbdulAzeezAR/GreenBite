@@ -4,7 +4,7 @@ const recipes = [
         title: "Avocado Toast",
         category: "breakfast",
         desc: "Simple and nutritious start to your day.",
-        image: "./images/AvocadoToast.jpg",
+        image: "./images/AvocadoToast.webp",
         ingredients: ["2 slices whole grain bread", "1 ripe avocado", "1 poached egg", "Salt and pepper"],
         steps: ["Toast the bread slices.", "Mash the avocado and spread on toast.", "Top with poached egg and season."],
         nutrition: { cal: 300, prot: 10, carb: 25, fat: 20 }
@@ -14,7 +14,7 @@ const recipes = [
         title: "Quinoa Salad",
         category: "lunch",
         desc: "Fresh and filling salad packed with protein.",
-        image: "./images/QuinoaSalad.jpg",
+        image: "./images/QuinoaSalad.webp",
         ingredients: ["1 cup quinoa", "1 cucumber", "Cherry tomatoes", "Feta cheese", "Olive oil dressing"],
         steps: ["Cook quinoa according to package.", "Chop vegetables and mix with quinoa.", "Drizzle with dressing and serve."],
         nutrition: { cal: 400, prot: 15, carb: 50, fat: 15 }
@@ -24,7 +24,7 @@ const recipes = [
         title: "Grilled Chicken",
         category: "dinner",
         desc: "Lean protein with veggies for a balanced meal.",
-        image: "./images/GrilledChicken.jpg",
+        image: "./images/GrilledChicken.webp",
         ingredients: ["4 oz chicken breast", "Mixed greens", "Lemon", "Herbs"],
         steps: ["Marinate chicken in lemon and herbs.", "Grill until cooked.", "Serve over greens."],
         nutrition: { cal: 350, prot: 30, carb: 10, fat: 15 }
@@ -34,7 +34,7 @@ const recipes = [
         title: "Berry Smoothie",
         category: "snack",
         desc: "Packed with vitamins, antioxidants, and fiber.",
-        image: "./images/BerrySmoothie.jpg",
+        image: "./images/BerrySmoothie.webp",
         ingredients: ["1 cup berries", "1 banana", "Almond milk", "Yogurt"],
         steps: ["Blend all ingredients until smooth.", "Pour and enjoy."],
         nutrition: { cal: 200, prot: 5, carb: 40, fat: 3 }
@@ -44,7 +44,7 @@ const recipes = [
         title: "Egg and cheese quesadilla",
         category: "breakfast",
         desc: "A quick and comforting meal.",
-        image: "./images/Eggcheesequesadilla.jpg",
+        image: "./images/Eggcheesequesadilla.webp",
         ingredients: ["1 large tortilla", "1–2 eggs", "Shredded cheese", "Optional salsa"],
         steps: ["Add the scrambled eggs and fold the tortilla in half.", "Cook until golden brown.", "Cheese is melted."],
         nutrition: { cal: 300, prot: 15, carb: 140, fat: 30 }
@@ -54,7 +54,7 @@ const recipes = [
         title: "Simple spinach omelet",
         category: "breakfast",
         desc: "Hot and nutritious breakfast in minutes.",
-        image: "./images/Simplespinachomelet.jpg",
+        image: "./images/Simplespinachomelet.webp",
         ingredients: ["2 eggs", "A handful of fresh spinach", "cheese (optional)"],
         steps: ["Sauté the spinach in a pan.", "Pour the eggs over the spinach and cook until set.", "Sprinkle cheese on top and fold the omelet."],
         nutrition: { cal: 450, prot: 16, carb: 170, fat: 35 }
@@ -64,7 +64,7 @@ const recipes = [
         title: "Mini egg muffins",
         category: "breakfast",
         desc: "These are individual frittata-like bites baked in a muffin tin",
-        image: "./images/Minieggmuffins.jpg",
+        image: "./images/Minieggmuffins.webp",
         ingredients: ["4–6 eggs", "a splash of milk", "shredded cheese"],
         steps: ["Pour the egg mixture into a greased muffin tin.", "Top with cheese.", "Bake at 375°F (190°C) until set."],
         nutrition: { cal: 375, prot: 18, carb: 120, fat: 25 }
@@ -74,7 +74,7 @@ const recipes = [
         title: "Turkey Sandwich",
         category: "lunch",
         desc: "A wholesome sandwich with lean turkey and creamy avocado.",
-        image: "./images/Turkey&AvocadoSandwich.jpg",
+        image: "./images/Turkey&AvocadoSandwich.webp",
         ingredients: ["2 slices whole grain bread", "Sliced turkey breast", "1/2 avocado", "Lettuce", "Mustard"],
         steps: ["Toast bread lightly.", "Mash avocado and spread on bread.", "Layer turkey and lettuce.", "Add mustard, assemble, and serve."],
         nutrition: { cal: 420, prot: 28, carb: 40, fat: 14 }
@@ -84,7 +84,7 @@ const recipes = [
         title: "Grilled Chicken Wrap",
         category: "lunch",
         desc: "A protein-rich wrap with fresh veggies.",
-        image: "./images/GrilledChickenWrap.jpg",
+        image: "./images/GrilledChickenWrap.webp",
         ingredients: ["1 whole wheat wrap", "Grilled chicken breast", "Lettuce", "Tomato", "Greek yogurt sauce"],
         steps: ["Grill chicken and slice.", "Layer chicken and veggies in wrap.", "Add sauce, roll up, and serve."],
         nutrition: { cal: 450, prot: 30, carb: 40, fat: 12 }
@@ -94,7 +94,7 @@ const recipes = [
         title: "Chickpea Bowl",
         category: "lunch",
         desc: "A hearty bowl with chickpeas, grains, and veggies.",
-        image: "./images/ChickpeaBowl.jpg",
+        image: "./images/ChickpeaBowl.webp",
         ingredients: ["1 cup brown rice", "1 cup chickpeas", "Cucumber", "Red onion", "Tahini sauce"],
         steps: ["Cook rice and set aside.", "Mix rice, chickpeas, and veggies.", "Top with tahini sauce and serve."],
         nutrition: { cal: 480, prot: 18, carb: 60, fat: 14 }
@@ -104,7 +104,7 @@ const recipes = [
         title: "Fruit & Nut Mix",
         category: "snack",
         desc: "A quick energy boost with nuts and dried fruit.",
-        image: "./images/Fruit&NutMix.jpg",
+        image: "./images/Fruit&NutMix.webp",
         ingredients: ["Almonds", "Cashews", "Raisins", "Dried cranberries", "Pumpkin seeds"],
         steps: ["Mix all ingredients in a bowl.", "Store in an airtight container.", "Enjoy as a quick snack."],
         nutrition: { cal: 250, prot: 7, carb: 22, fat: 15 }
@@ -114,7 +114,7 @@ const recipes = [
         title: "Greek Yogurt Parfait",
         category: "snack",
         desc: "Creamy yogurt layered with fruits and granola.",
-        image: "./images/GreekYogurtParfait.jpg",
+        image: "./images/GreekYogurtParfait.webp",
         ingredients: ["1 cup Greek yogurt", "Mixed berries", "Granola", "Honey"],
         steps: ["Spoon yogurt into a glass.", "Layer with berries and granola.", "Drizzle with honey and serve."],
         nutrition: { cal: 280, prot: 12, carb: 36, fat: 8 }
@@ -124,7 +124,7 @@ const recipes = [
         title: "Veggie Sticks",
         category: "snack",
         desc: "Crunchy vegetables served with creamy hummus.",
-        image: "./images/VeggieSticksHummus.jpg",
+        image: "./images/VeggieSticksHummus.webp",
         ingredients: ["Carrot sticks", "Cucumber sticks", "Celery sticks", "Hummus dip"],
         steps: ["Wash and slice vegetables.", "Arrange on a plate.", "Serve with hummus for dipping."],
         nutrition: { cal: 180, prot: 6, carb: 20, fat: 9 }
@@ -134,7 +134,7 @@ const recipes = [
         title: "Grilled Salmon",
         category: "dinner",
         desc: "Nutritious salmon fillet with roasted vegetables.",
-        image: "./images/GrilledSalmonVeggies.jpg",
+        image: "./images/GrilledSalmonVeggies.webp",
         ingredients: ["1 salmon fillet", "Broccoli florets", "Carrots", "Olive oil", "Lemon"],
         steps: ["Season salmon with olive oil and lemon.", "Grill salmon until cooked.", "Roast veggies and serve together."],
         nutrition: { cal: 520, prot: 35, carb: 25, fat: 28 }
@@ -144,7 +144,7 @@ const recipes = [
         title: "Pasta Primavera",
         category: "dinner",
         desc: "Light pasta dish with fresh seasonal vegetables.",
-        image: "./images/PastaPrimavera.jpg",
+        image: "./images/PastaPrimavera.webp",
         ingredients: ["Whole wheat pasta", "Zucchini", "Bell peppers", "Garlic", "Parmesan cheese"],
         steps: ["Cook pasta until al dente.", "Sauté vegetables with garlic.", "Toss pasta with veggies and cheese."],
         nutrition: { cal: 480, prot: 15, carb: 70, fat: 12 }
@@ -154,7 +154,7 @@ const recipes = [
         title: "Stir-Fried Tofu & Rice",
         category: "dinner",
         desc: "Flavorful stir-fry with tofu and rice.",
-        image: "./images/TofuStirFry.jpg",
+        image: "./images/TofuStirFry.webp",
         ingredients: ["1 block tofu", "1 cup rice", "Soy sauce", "Mixed vegetables", "Sesame oil"],
         steps: ["Cook rice and set aside.", "Stir-fry tofu until golden.", "Add vegetables and sauce, mix with rice."],
         nutrition: { cal: 500, prot: 20, carb: 65, fat: 15 }
