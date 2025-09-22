@@ -4,7 +4,7 @@ const recipes = [
         title: "Avocado Toast",
         category: "breakfast",
         desc: "Simple and nutritious start to your day.",
-        image: "../images/AvocadoToast.jpg",
+        image: "./images/AvocadoToast.jpg",
         ingredients: ["2 slices whole grain bread", "1 ripe avocado", "1 poached egg", "Salt and pepper"],
         steps: ["Toast the bread slices.", "Mash the avocado and spread on toast.", "Top with poached egg and season."],
         nutrition: { cal: 300, prot: 10, carb: 25, fat: 20 }
@@ -124,7 +124,7 @@ const recipes = [
         title: "Veggie Sticks",
         category: "snack",
         desc: "Crunchy vegetables served with creamy hummus.",
-        image: "../images/VeggieSticksHummus.jpg",
+        image: "./images/VeggieSticksHummus.jpg",
         ingredients: ["Carrot sticks", "Cucumber sticks", "Celery sticks", "Hummus dip"],
         steps: ["Wash and slice vegetables.", "Arrange on a plate.", "Serve with hummus for dipping."],
         nutrition: { cal: 180, prot: 6, carb: 20, fat: 9 }
@@ -134,7 +134,7 @@ const recipes = [
         title: "Grilled Salmon",
         category: "dinner",
         desc: "Nutritious salmon fillet with roasted vegetables.",
-        image: "../images/GrilledSalmonVeggies.jpg",
+        image: "./images/GrilledSalmonVeggies.jpg",
         ingredients: ["1 salmon fillet", "Broccoli florets", "Carrots", "Olive oil", "Lemon"],
         steps: ["Season salmon with olive oil and lemon.", "Grill salmon until cooked.", "Roast veggies and serve together."],
         nutrition: { cal: 520, prot: 35, carb: 25, fat: 28 }
