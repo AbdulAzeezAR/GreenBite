@@ -1,5 +1,5 @@
 const CACHE_NAME = 'greenbite-v1';
-const urlsToCache = [
+const urlsToCache = [ // Resources to cache
   './',
   './styles/styles.css',
   './index.html',
@@ -15,14 +15,14 @@ const urlsToCache = [
   './script/script.js'
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', event => { // Install service worker and cache resources
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', event => { // Fetch and serve cached content
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))

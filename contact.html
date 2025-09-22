@@ -41,11 +41,11 @@
         <button type="submit">Submit Feedback</button>
       </form>
       <div id="confirmation"></div>
-      <div class="map">
+      <div class="map"> // Embedded Google Map
         <h2>GreenBite HQ</h2>
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31686.22661582428!2d79.83815163765869!3d6.927078667509258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2593cf65a531d%3A0x2c81a87d80a2d2c!2sColombo%2C%20Sri%20Lanka!5e0!3m2!1sen!2sus!4v1695200000000!5m2!1sen!2sus" width="600" height="450" style="border:0; max-width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-      <div class="faq">
+      <div class="faq"> // FAQ Section
         <h2>FAQ</h2>
         <div class="accordion">
           <div class="item">
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div id="savedFeedback">
+      <div id="savedFeedback"> // Section to display saved feedback
         <h2>Saved Feedback</h2>
         <div id="feedbackList"></div>
         <button onclick="exportFeedback()">Export Feedback</button>
@@ -85,7 +85,7 @@
   </footer>
   <script src="./script/script.js"></script>
   <script>
-    console.log('Contact page script loaded');
+    console.log('Contact page script loaded'); // Debugging log
     document.getElementById('feedbackForm').addEventListener('submit', e => {
       e.preventDefault();
       console.log('Form submission triggered');
@@ -96,7 +96,7 @@
         alert('Please enter a valid email address.');
         return;
       }
-      const feedback = { name, email, message, date: new Date().toISOString() };
+      const feedback = { name, email, message, date: new Date().toISOString() }; // Store feedback with timestamp
       let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
       feedbacks.push(feedback);
       localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
@@ -105,7 +105,7 @@
       displayFeedback();
     });
 
-    function toggleAccordion(event) {
+    function toggleAccordion(event) { // Toggle FAQ accordion panels
       event.preventDefault();
       event.stopPropagation();
       const header = event.currentTarget;
@@ -115,10 +115,10 @@
     }
 
     document.querySelectorAll('.accordion-header').forEach(header => {
-      header.addEventListener('click', toggleAccordion);
+      header.addEventListener('click', toggleAccordion); // Attach click event to each accordion header
     });
 
-    function displayFeedback() {
+    function displayFeedback() { // Display saved feedback from localStorage
       const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
       const list = document.getElementById('feedbackList');
       list.innerHTML = feedbacks.length
@@ -126,7 +126,7 @@
         : '<p>No feedback yet.</p>';
     }
 
-    function exportFeedback() {
+    function exportFeedback() { // Export feedback as JSON file
       const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
       const data = JSON.stringify(feedbacks, null, 2);
       const blob = new Blob([data], { type: 'application/json' });
@@ -138,7 +138,7 @@
       URL.revokeObjectURL(url);
     }
 
-    function clearFeedback() {
+    function clearFeedback() { // Clear all saved feedback
       if (confirm('Are you sure you want to clear all feedback?')) {
         localStorage.removeItem('feedbacks');
         document.getElementById('feedbackList').innerHTML = '<p>No feedback yet.</p>';
@@ -146,7 +146,7 @@
       }
     }
 
-    window.addEventListener('load', displayFeedback);
+    window.addEventListener('load', displayFeedback); // Load feedback on page load
   </script>
 </body>
 </html>

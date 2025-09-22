@@ -33,7 +33,7 @@
     </nav>
   </header>
   <main>
-    <section class="hero reveal">
+    <section class="hero reveal"> // Hero Section
       <div class="hero-content">
         <h1>Welcome to GreenBite</h1>
         <p>Your journey to balanced meals, exercise, and mindfulness starts here.</p>
@@ -67,7 +67,7 @@
       '"To keep the body in good health is a duty." - Buddha'
     ];
     let currentQuote = 0;
-    function rotateQuotes() {
+    function rotateQuotes() { // Function to rotate quotes every 5 seconds
       const div = document.getElementById('quotes');
       div.textContent = quotes[currentQuote];
       currentQuote = (currentQuote + 1) % quotes.length;

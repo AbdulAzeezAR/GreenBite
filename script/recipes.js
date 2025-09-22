@@ -1,4 +1,4 @@
-const recipes = [
+const recipes = [ // Sample recipe data
       {
         id: 1,
         title: "Avocado Toast",
@@ -161,7 +161,7 @@ const recipes = [
       }
     ];
 
-    function displayRecipes(recipesToShow) {
+    function displayRecipes(recipesToShow) { // Display recipes in the grid
       const grid = document.getElementById('recipesGrid');
       grid.innerHTML = recipesToShow.map(r => `
         <div class="card reveal">
@@ -173,7 +173,7 @@ const recipes = [
       `).join('');
     }
 
-    function filterRecipes() {
+    function filterRecipes() { // Filter recipes based on search and category
       const search = document.getElementById('search').value.toLowerCase();
       const cat = document.getElementById('categoryFilter').value;
       const filtered = recipes.filter(r =>
@@ -183,10 +183,10 @@ const recipes = [
       displayRecipes(filtered);
     }
 
-    document.getElementById('search').addEventListener('input', filterRecipes);
+    document.getElementById('search').addEventListener('input', filterRecipes); // Search input handler
     document.getElementById('categoryFilter').addEventListener('change', filterRecipes);
 
-    function openModal(id) {
+    function openModal(id) { // Open modal with recipe details
       const recipe = recipes.find(r => r.id === id);
       document.getElementById('modalBody').innerHTML = `
         <img src="${recipe.image}" alt="${recipe.title}" style="width:100%; border-radius:4px;">
@@ -208,11 +208,11 @@ const recipes = [
       document.getElementById('modal').style.display = 'block';
     }
 
-    function closeModal() {
+    function closeModal() { // Close the modal
       document.getElementById('modal').style.display = 'none';
     }
 
-    function saveRecipe(id) {
+    function saveRecipe(id) { // Save recipe to localStorage
       let saved = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
       if (!saved.includes(id)) {
         saved.push(id);

@@ -35,7 +35,7 @@
     <section class="workout reveal">
       <h1>Workout Generator</h1>
      
-    <div class="sounds reveal" style="text-align: center;">
+    <div class="sounds reveal" style="text-align: center;"> // Added workout music section
   <div>
     <button onclick="playSound('spark')">Spark</button>
     <audio loop id="spark" src="./audio/spark.mp3"></audio>
@@ -50,7 +50,7 @@
   </div>
   <p>Note: Toggles pre-recorded workout music.</p>
 </div>
-      <form id="workoutForm" style="max-width: 500px; margin: 2rem auto;">
+      <form id="workoutForm" style="max-width: 500px; margin: 2rem auto;"> // Added form to select workout preferences
         <label>Body Part:
           <select id="bodyPart">
             <option value="full">Full Body</option>
@@ -66,13 +66,13 @@
             <option value="barbell">Barbell</option>
           </select>
         </label>
-        <button type="submit">Generate Workout</button>
+        <button type="submit">Generate Workout</button> // Button to generate workout plan
       </form>
       <div id="workoutPlan" class="exercises"></div>
     </section>
   </main>
   <footer>
-    <div class="footer-container">
+    <div class="footer-container"> 
       <div class="newsletter">
         <input type="email" placeholder="Subscribe to newsletter" id="emailSub">
         <button onclick="subscribeNewsletter()">Subscribe</button>
@@ -84,9 +84,9 @@
       <p>&copy; 2025 GreenBite. All rights reserved.</p>
       </div>
   </footer>
-  <script src="./script/script.js"></script>
+  <script src="./script/script.js"></script> 
   <script>
-    const workouts = {
+    const workouts = { // Predefined workout exercises
       full: {
         none: ['Jumping Jacks', 'Burpees', 'Mountain Climbers'],
         dumbbells: ['Squats with weights', 'Lunges', 'Push-ups with dumbbells'],
@@ -109,10 +109,10 @@
       }
     };
 
-    let currentTimer = null;
-    let audioCtx = null;
+    let currentTimer = null; // To manage workout timers
+    let audioCtx = null; // Audio context for beep sound
 
-    function playBeep() {
+    function playBeep() { // Function to play beep sound when timer ends
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
@@ -126,7 +126,7 @@
       oscillator.stop(audioCtx.currentTime + 0.5);
     }
 
-    document.getElementById('workoutForm').addEventListener('submit', e => {
+    document.getElementById('workoutForm').addEventListener('submit', e => { // Handle form submission
       e.preventDefault();
       const body = document.getElementById('bodyPart').value;
       const eq = document.getElementById('equip').value;
@@ -142,9 +142,9 @@
           <button onclick="startTimer(${i}, ${ex.time})">Start Timer</button>
         </div>
       `).join('');
-    });
+    }); // Function to start individual exercise timer
 
-    function startTimer(index, duration) {
+    function startTimer(index, duration) { // Start countdown for exercise
       if (currentTimer) clearInterval(currentTimer);
       let time = duration;
       const span = document.getElementById(`timer${index}`);
@@ -159,9 +159,9 @@
       }, 1000);
     }
     
- let currentAudio = null;
+ let currentAudio = null; // To manage audio playback
 
-function playSound(type) {
+function playSound(type) { // Function to play/pause workout music
   const audio = document.getElementById(type);
   const button = event.target;
   if (currentAudio && currentAudio !== audio) {
@@ -170,7 +170,7 @@ function playSound(type) {
     document.querySelector(`button[onclick="playSound('${currentAudio.id}')"]`).textContent = 
       currentAudio.id === 'spark' ? 'Spark' : currentAudio.id === 'rush' ? 'Rush' : 'Energy';
   }
-  if (audio.paused) {
+  if (audio.paused) { // If audio is paused, play it
     audio.play();
     button.textContent = type === 'spark' ? 'Stop Spark' : type === 'rush' ? 'Stop Rush' : 'Stop Energy';
     currentAudio = audio;
